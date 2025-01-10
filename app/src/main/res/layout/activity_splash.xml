@@ -24,9 +24,12 @@
         android:id="@+id/logo"
         android:layout_width="310dp"
         android:layout_height="331dp"
+        android:layout_marginStart="50dp"
+        android:layout_marginEnd="51dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:srcCompat="@mipmap/ic_launcher_foreground"
-        tools:layout_editor_absoluteX="50dp"
-        tools:layout_editor_absoluteY="401dp"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

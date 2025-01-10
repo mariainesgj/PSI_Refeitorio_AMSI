@@ -4,12 +4,12 @@ plugins {
 
 android {
     namespace = "pt.ipleiria.estg.dei.refeitorio"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "pt.ipleiria.estg.dei.refeitorio"
         minSdk = 24
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -28,6 +28,7 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 }
 
