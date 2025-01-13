@@ -7,15 +7,10 @@ import java.util.Objects;
 public class User {
     private Long id;
     private String username;
-    private String authKey;
-    private String passwordHash;
-    private String passwordResetToken;
     private String email;
     private String status;
     private String createdAt;
     private String updatedAt;
-    private String verificationToken;
-
 
     public Long getId() {
         return id;
@@ -31,30 +26,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getAuthKey() {
-        return authKey;
-    }
-
-    public void setAuthKey(String authKey) {
-        this.authKey = authKey;
-    }
-
-    public String getPasswordHash() {
-        return passwordHash;
-    }
-
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
-    }
-
-    public String getPasswordResetToken() {
-        return passwordResetToken;
-    }
-
-    public void setPasswordResetToken(String passwordResetToken) {
-        this.passwordResetToken = passwordResetToken;
     }
 
     public String getEmail() {
@@ -87,14 +58,6 @@ public class User {
 
     public void setUpdatedAt(String updatedAt) {
         this.updatedAt = updatedAt;
-    }
-
-    public String getVerificationToken() {
-        return verificationToken;
-    }
-
-    public void setVerificationToken(String verificationToken) {
-        this.verificationToken = verificationToken;
     }
 
     @Override
