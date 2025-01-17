@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/content"
-    tools:context=".activities.ChooseActivity">
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/content"
+        tools:context=".ui.activities.ChooseActivity">
 
 
 
-    <TextView
-        android:id="@+id/refeitorio_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="116dp"
-        android:text="REFEITÓRIO"
-        android:textAllCaps="true"
-        android:textColor="#50A9B4"
-        android:textSize="48sp"
-        android:textStyle="normal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="HardcodedText" />
+        <TextView
+            android:id="@+id/refeitorio_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="116dp"
+            android:text="REFEITÓRIO"
+            android:textAllCaps="true"
+            android:textColor="#50A9B4"
+            android:textSize="48sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="HardcodedText" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_criar"
-        android:layout_width="286dp"
-        android:layout_height="63dp"
-        android:layout_marginTop="16dp"
-        android:backgroundTint="#50A9B4"
-        android:text="Criar conta"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_entrar"
-        tools:ignore="HardcodedText" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_criar"
+            android:layout_width="286dp"
+            android:layout_height="63dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#50A9B4"
+            android:text="Criar conta"
+            android:textColor="#FFFFFF"
+            app:cornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_entrar"
+            tools:ignore="HardcodedText" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_entrar"
-        android:layout_width="282dp"
-        android:layout_height="64dp"
-        android:layout_marginTop="80dp"
-        android:backgroundTint="#50A9B4"
-        android:text="Entrar"
-        android:textColor="#FFFFFF"
-        app:cornerRadius="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/refeitorio_tv"
-        tools:ignore="HardcodedText" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_entrar"
+            android:layout_width="282dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="80dp"
+            android:backgroundTint="#50A9B4"
+            android:text="Entrar"
+            android:textColor="#FFFFFF"
+            app:cornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/refeitorio_tv"
+            tools:ignore="HardcodedText" />
 
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="310dp"
-        android:layout_height="0dp"
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="310dp"
+            android:layout_height="0dp"
 
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHeight_max="331dp"
-        app:layout_constraintHeight_min="200dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@mipmap/ic_launcher_foreground"
-        tools:ignore="MissingConstraints" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="331dp"
+            app:layout_constraintHeight_min="200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:srcCompat="@mipmap/ic_launcher_foreground"
+            tools:ignore="MissingConstraints" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

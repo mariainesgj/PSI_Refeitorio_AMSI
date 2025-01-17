@@ -1,11 +1,10 @@
-package pt.ipleiria.estg.dei.refeitorio.activities;
+package pt.ipleiria.estg.dei.refeitorio.ui.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.TextView;
 
 import pt.ipleiria.estg.dei.refeitorio.R;
 import pt.ipleiria.estg.dei.refeitorio.data.models.User;

@@ -14,13 +14,13 @@
         android:theme="@style/Theme.Refeitorio"
         tools:targetApi="31">
         <activity
-            android:name=".activities.HomeActivity"
+            android:name=".ui.activities.HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.RegisterActivity"
+            android:name=".ui.activities.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".activities.SplashActivity"
+            android:name=".ui.activities.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,8 +37,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.ChooseActivity" />
-        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".ui.activities.ChooseActivity" />
+        <activity android:name=".ui.activities.LoginActivity" />
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package pt.ipleiria.estg.dei.refeitorio.activities;
+package pt.ipleiria.estg.dei.refeitorio.ui.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
