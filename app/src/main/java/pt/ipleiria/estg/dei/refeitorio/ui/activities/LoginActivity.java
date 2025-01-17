@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import java.util.Objects;
 
-import pt.ipleiria.estg.dei.refeitorio.R;
 import pt.ipleiria.estg.dei.refeitorio.data.repository.UserRepository;
 import pt.ipleiria.estg.dei.refeitorio.databinding.ActivityLoginBinding;
 import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.GenericViewModelFactory;
