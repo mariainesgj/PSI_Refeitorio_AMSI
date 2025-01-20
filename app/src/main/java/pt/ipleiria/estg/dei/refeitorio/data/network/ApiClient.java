@@ -9,6 +9,8 @@ public class ApiClient {
     private static ApiClient instance;
     private final RequestQueue requestQueue;
 
+    public static final String RESULT_SUCCESS = "success";
+
     private ApiClient(Context context) {
         requestQueue = Volley.newRequestQueue(context.getApplicationContext());
     }

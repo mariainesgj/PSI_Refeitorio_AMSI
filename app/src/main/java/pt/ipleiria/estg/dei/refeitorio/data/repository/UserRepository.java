@@ -4,11 +4,20 @@ import static java.util.Map.entry;
 
 import android.content.Context;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ipleiria.estg.dei.refeitorio.data.models.User;
+import pt.ipleiria.estg.dei.refeitorio.data.network.ApiClient;
 import pt.ipleiria.estg.dei.refeitorio.data.network.ApiEndpoints;
 import pt.ipleiria.estg.dei.refeitorio.data.network.RequestHandler;
+import pt.ipleiria.estg.dei.refeitorio.helpers.SharedPref;
 
 public class UserRepository {
     private final Context context;
@@ -20,25 +29,43 @@ public class UserRepository {
     public void login(
             String login,
             String password,
-            RequestHandler.SuccessListener<Boolean>  onSuccess,
+            RequestHandler.SuccessListener<Boolean> onSuccess,
             RequestHandler.ErrorListener onError
-    ){
+    ) {
+        if (login == null || login.isEmpty() || password == null || password.isEmpty()) {
+            onError.onError("Username ou palavra-passe não podem estar vazios.");
+            return;
+        }
 
-        Map<String, String> params = new HashMap<>();
-        params.put("login", login);
-        params.put("password", password);
+        JsonObject body = new JsonObject();
+        body.addProperty("username", login);
+        body.addProperty("password", password);
 
+        RequestHandler.postData(context, ApiEndpoints.LOGIN, body ,new HashMap<>(), response -> {
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
+                if (RequestHandler.checkIfSuccess(jsonResponse)) {
 
-        RequestHandler.postData(context, ApiEndpoints.LOGIN, params , response -> {
-            //TODO parse json to Model
-            //TODO save tokens
-            onSuccess.onSuccess(true);
+                    JSONObject data = jsonResponse.getJSONObject("data");
+                    // Validar response, verificar se possui chaves to objeto User
+                    User user = new Gson().fromJson(data.getString("user"), User.class);
 
-        }, error -> {
-            //TODO parse error
-            onError.onError("Mensagem de error");
-        });
+                    String token = jsonResponse.getString("access_token");
+                    SharedPref.setItem(SharedPref.TOKEN, token);
+                    SharedPref.setItem(SharedPref.KEY_USER, user);
+
+                    onSuccess.onSuccess(true);
+                } else {
+                    String errorMessage = jsonResponse.optString("message", "Erro desconhecido");
+                    onError.onError(errorMessage);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                onError.onError("Erro ao processar a resposta do servidor.");
+            }
+        }, onError);
     }
+
 
     public void register(
             String username,
@@ -54,7 +81,7 @@ public class UserRepository {
             RequestHandler.SuccessListener<Boolean> onSuccess,
             RequestHandler.ErrorListener onError
     ) {
-        Map<String, String> params = new HashMap<>();
+        /*Map<String, String> params = new HashMap<>();
         params.put("username", username);
         params.put("email", email);
         params.put("password", password);
@@ -74,7 +101,7 @@ public class UserRepository {
         }, error -> {
             // TODO: Tratar erros
             onError.onError("Mensagem de erro");
-        });
+        });*/
     }
 
 }

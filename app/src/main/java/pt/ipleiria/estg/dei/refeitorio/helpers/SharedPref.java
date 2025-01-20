@@ -9,6 +9,7 @@ import pt.ipleiria.estg.dei.refeitorio.MainApplication;
 public class SharedPref{
 
     static final public String KEY_USER = "jfreUBGEVFEA";
+    static final public String TOKEN = "TalakdjfA";
     static final private SharedPreferences prefs = MainApplication.getContext().getSharedPreferences("refeitorio_preferences", Context.MODE_PRIVATE);
 
     public static <T> T getItem(String key, Class<T> clazz){

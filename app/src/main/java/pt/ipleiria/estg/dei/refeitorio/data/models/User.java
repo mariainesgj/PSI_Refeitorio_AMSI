@@ -1,22 +1,22 @@
 package pt.ipleiria.estg.dei.refeitorio.data.models;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Objects;
 
-public class User {
-    private Long id;
-    private String username;
-    private String email;
-    private String status;
-    private String createdAt;
-    private String updatedAt;
+public class User{
+    public int id;
+    public String username;
+    public String email;
+    public int status;
+    public int created_at;
+    public int updated_at;
+    public Profile profile;
 
-    public Long getId() {
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -36,36 +36,45 @@ public class User {
         this.email = email;
     }
 
-    public String getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public int getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(int created_at) {
+        this.created_at = created_at;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public int getUpdated_at() {
+        return updated_at;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdated_at(int updated_at) {
+        this.updated_at = updated_at;
     }
+
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile profile) {
+        this.profile = profile;
+    }
+
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return getId().equals(user.getId());
+        return getId() == user.getId();
     }
 
     @Override

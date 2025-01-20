@@ -17,30 +17,27 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(5000); //timer
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        User user = SharedPref.getItem(SharedPref.KEY_USER, User.class);
-
-                        Intent intent;
-                        if (user == null) {
-                            intent = new Intent(SplashActivity.this, ChooseActivity.class);
-                        } else {
-                            intent = new Intent(SplashActivity.this, HomeActivity.class);
-                        }
-                        startActivity(intent);
-                        finish(); //garante que não permite voltar para trás
-                    }
-                });
+        new Thread(() -> {
+            try {
+                Thread.sleep(3000); //timer
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    User user = SharedPref.getItem(SharedPref.KEY_USER, User.class);
+
+                    Intent intent;
+                    if (user == null) {
+                        intent = new Intent(SplashActivity.this, ChooseActivity.class);
+                    } else {
+                        intent = new Intent(SplashActivity.this, HomeActivity.class);
+                    }
+                    startActivity(intent);
+                    finish(); //garante que não permite voltar para trás
+                }
+            });
         }).start();
     }
 

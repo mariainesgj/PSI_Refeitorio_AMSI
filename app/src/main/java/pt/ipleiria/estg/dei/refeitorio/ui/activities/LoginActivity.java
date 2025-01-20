@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.refeitorio.ui.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -45,6 +46,8 @@ public class LoginActivity  extends AppCompatActivity {
             if(value){
                 //TODO redirect to HomePage
                 Log.i( "Login","Login foi sucesso");
+                startActivity(new Intent(this, HomeActivity.class));
+                finish();
             }
 
         });
