@@ -15,4 +15,5 @@
     <style name="Theme.Refeitorio.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.Refeitorio.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>

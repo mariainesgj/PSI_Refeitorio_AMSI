@@ -15,6 +15,7 @@ import java.util.Objects;
 
 import pt.ipleiria.estg.dei.refeitorio.data.repository.UserRepository;
 import pt.ipleiria.estg.dei.refeitorio.databinding.ActivityLoginBinding;
+import pt.ipleiria.estg.dei.refeitorio.ui.activities.home.HomeActivity;
 import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.GenericViewModelFactory;
 import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.LoginViewModel;
 

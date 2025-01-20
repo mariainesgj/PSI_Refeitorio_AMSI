@@ -9,6 +9,7 @@ import android.os.Bundle;
 import pt.ipleiria.estg.dei.refeitorio.R;
 import pt.ipleiria.estg.dei.refeitorio.data.models.User;
 import pt.ipleiria.estg.dei.refeitorio.helpers.SharedPref;
+import pt.ipleiria.estg.dei.refeitorio.ui.activities.home.HomeActivity;
 
 @SuppressLint("CustomSplashScreen")
 public class SplashActivity extends AppCompatActivity {
