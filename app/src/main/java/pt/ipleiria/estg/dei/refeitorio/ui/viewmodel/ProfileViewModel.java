@@ -15,6 +15,7 @@ public class ProfileViewModel extends ViewModel {
     private MutableLiveData<String> locale = new MutableLiveData<>();
     private MutableLiveData<String> postalCode = new MutableLiveData<>();
 
+
     public void setUsername(String username) {
         this.username.setValue(username);
     }

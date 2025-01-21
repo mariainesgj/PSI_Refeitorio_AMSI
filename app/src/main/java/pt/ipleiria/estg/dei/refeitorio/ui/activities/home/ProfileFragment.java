@@ -21,7 +21,7 @@ import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.ProfileViewModel;
  */
 public class ProfileFragment extends Fragment {
 
-    private ProfileViewModel viewModel; // ViewModel
+    private ProfileViewModel viewModel;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -73,5 +73,9 @@ public class ProfileFragment extends Fragment {
         }
 
         return rootView;
+    }
+
+    public void doLogout(){
+
     }
 }
