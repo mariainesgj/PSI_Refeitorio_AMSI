@@ -5,10 +5,174 @@
     android:layout_height="match_parent"
     tools:context=".ui.activities.home.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Profile fragment" />
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:textColor="#50A9B4"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/baseline_arrow_forward_ios_24"
+                    android:tint="@color/azul" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_weight="1"
+                    android:text="As Minhas Faturas"
+                    android:textColor="#50A9B4"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="Seta As Minhas Faturas"
+                    android:src="@drawable/baseline_arrow_forward_ios_24"
+                    android:tint="@color/azul" />
+            </LinearLayout>
+
+            <!-- Título Os Meus Dados -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="60dp"
+                android:text="Os meus dados"
+                android:textAllCaps="true"
+                android:textColor="#50A9B4"
+                android:textSize="34sp"
+                android:textStyle="normal" />
+
+            <EditText
+                android:id="@+id/inputUsername"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:backgroundTint="#50A9B4"
+                android:hint="Nome de Utilizador"
+                android:inputType="text"
+                android:padding="12dp"
+                android:text="@={viewModel.username}" />
+
+            <EditText
+                android:id="@+id/inputEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#50A9B4"
+                android:hint="E-mail"
+                android:inputType="textEmailAddress"
+                android:padding="12dp"
+                android:text="@={viewModel.email}" />
+
+
+            <EditText
+                android:id="@+id/inputName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#50A9B4"
+                android:hint="Nome"
+                android:inputType="text"
+                android:padding="12dp"
+                android:text="@={viewModel.nameUser}" />
+
+            <EditText
+                android:id="@+id/inputPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#50A9B4"
+                android:hint="Nº Telemóvel"
+                android:inputType="phone"
+                android:padding="12dp"
+                android:text="@={viewModel.phoneNumber}" />
+
+            <EditText
+                android:id="@+id/inputStreet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#50A9B4"
+                android:hint="Morada"
+                android:inputType="text"
+                android:padding="12dp"
+                android:text="@={viewModel.address}" />
+
+            <EditText
+                android:id="@+id/inputLocal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#50A9B4"
+                android:hint="Localidade"
+                android:inputType="text"
+                android:padding="12dp"
+                android:text="@={viewModel.locale}" />
+
+            <EditText
+                android:id="@+id/inputPostalCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#50A9B4"
+                android:hint="Código Postal"
+                android:inputType="textPostalAddress"
+                android:padding="12dp"
+                android:text="@={viewModel.postalCode}" />
+
+            <Spinner
+                android:id="@+id/roleSpinner2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:backgroundTint="#50A9B4"
+                android:entries="@array/cozinha_array" />
+        </LinearLayout>
+
+    </ScrollView>
 
 </FrameLayout>
