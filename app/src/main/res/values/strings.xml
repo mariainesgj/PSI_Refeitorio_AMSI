@@ -21,8 +21,8 @@
     </string-array>
 
     <string-array name="cozinha_array">
-        <item>Refeitório das Caldas da Rainha</item>
-        <item>Refeitório de Leiria</item>
+        <item>1</item>
+        <item>3</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

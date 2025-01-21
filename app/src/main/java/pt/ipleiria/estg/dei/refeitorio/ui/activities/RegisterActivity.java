@@ -6,6 +6,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -14,6 +15,7 @@ import java.util.Objects;
 
 import pt.ipleiria.estg.dei.refeitorio.data.repository.UserRepository;
 import pt.ipleiria.estg.dei.refeitorio.databinding.ActivityRegisterBinding;
+import pt.ipleiria.estg.dei.refeitorio.ui.activities.home.HomeActivity;
 import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.GenericViewModelFactory;
 import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.RegisterViewModel;
 
@@ -39,8 +41,9 @@ public class RegisterActivity extends AppCompatActivity {
 
         viewModel.getDoSuccess().observe(this, value -> {
             if(value){
-                //TODO redirect to HomePage
                 Log.i( "Registo","Registo efetuado com sucesso");
+                startActivity(new Intent(this, HomeActivity.class));
+                finish();
             }
 
         });

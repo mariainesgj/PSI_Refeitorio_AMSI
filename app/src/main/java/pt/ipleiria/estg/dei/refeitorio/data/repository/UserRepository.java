@@ -22,7 +22,7 @@ import pt.ipleiria.estg.dei.refeitorio.helpers.SharedPref;
 public class UserRepository {
     private final Context context;
 
-    public UserRepository(Context context){
+    public UserRepository(Context context) {
         this.context = context;
     }
 
@@ -41,13 +41,13 @@ public class UserRepository {
         body.addProperty("username", login);
         body.addProperty("password", password);
 
-        RequestHandler.postData(context, ApiEndpoints.LOGIN, body ,new HashMap<>(), response -> {
+        RequestHandler.postData(context, ApiEndpoints.LOGIN, body, new HashMap<>(), response -> {
             try {
                 JSONObject jsonResponse = new JSONObject(response);
                 if (RequestHandler.checkIfSuccess(jsonResponse)) {
 
                     JSONObject data = jsonResponse.getJSONObject("data");
-                    // Validar response, verificar se possui chaves to objeto User
+                    // TODO Validar response, verificar se possui chaves to objeto User
                     User user = new Gson().fromJson(data.getString("user"), User.class);
 
                     String token = jsonResponse.getString("access_token");
@@ -81,27 +81,47 @@ public class UserRepository {
             RequestHandler.SuccessListener<Boolean> onSuccess,
             RequestHandler.ErrorListener onError
     ) {
-        /*Map<String, String> params = new HashMap<>();
-        params.put("username", username);
-        params.put("email", email);
-        params.put("password", password);
-        params.put("name", nameUser);
-        params.put("mobile", phoneNumber);
-        params.put("street", address);
-        params.put("locale", locale);
-        params.put("postalCode", postalCode);
-        params.put("role", role);
-        params.put("cozinha_id", String.valueOf(cozinha));
 
-        RequestHandler.postData(context, ApiEndpoints.REGISTER, params, response -> {
-            // TODO: Parsear o JSON para o modelo
-            // TODO: Salvar tokens
-            onSuccess.onSuccess(true);
+        if (username == null || username.isEmpty() || email == null || email.isEmpty()
+                || password == null || password.isEmpty() || nameUser == null || nameUser.isEmpty()
+                || phoneNumber == null || phoneNumber.isEmpty() || address == null || address.isEmpty()
+                || locale == null || locale.isEmpty() || postalCode == null || postalCode.isEmpty()
+                || role == null || role.isEmpty() || cozinha <= 0) {
+            onError.onError("Preencha todos os campos, por favor.");
+            return;
+        }
 
-        }, error -> {
-            // TODO: Tratar erros
-            onError.onError("Mensagem de erro");
-        });*/
+        JsonObject body = new JsonObject();
+        body.addProperty("username", username);
+        body.addProperty("email", email);
+        body.addProperty("password", password);
+        body.addProperty("name", nameUser);
+        body.addProperty("mobile", phoneNumber);
+        body.addProperty("street", address);
+        body.addProperty("locale", locale);
+        body.addProperty("postalCode", postalCode);
+        body.addProperty("role", role);
+        body.addProperty("cozinha_id", cozinha);
+
+        RequestHandler.postData(context, ApiEndpoints.REGISTER, body, new HashMap<>(), response -> {
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
+                if (RequestHandler.checkIfSuccess(jsonResponse)) {
+                    JSONObject data = jsonResponse.getJSONObject("data");
+                    User user = new Gson().fromJson(data.getString("user"), User.class);
+                    String token = jsonResponse.getString("auth_key");
+                    SharedPref.setItem(SharedPref.TOKEN, token);
+                    SharedPref.setItem(SharedPref.KEY_USER, user);
+                    onSuccess.onSuccess(true);
+                } else {
+                    String errorMessage = jsonResponse.optString("message", "Erro desconhecido");
+                    onError.onError(errorMessage);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                onError.onError("Erro ao processar a resposta do servidor.");
+            }
+        }, onError);
     }
 
 }
