@@ -21,4 +21,9 @@ public class SharedPref{
         String json = new Gson().toJson(obj);
         prefs.edit().putString(key, json).apply();
     }
+
+    public static void logout(){
+        prefs.edit().remove(KEY_USER).apply();
+        prefs.edit().remove(TOKEN).apply();
+    }
 }

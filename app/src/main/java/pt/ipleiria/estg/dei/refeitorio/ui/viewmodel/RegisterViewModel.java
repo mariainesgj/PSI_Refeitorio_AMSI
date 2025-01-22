@@ -33,8 +33,8 @@ public class RegisterViewModel extends ViewModel {
     }
 
 
-    public RegisterViewModel(UserRepository userRepository){
-        this.userRepository = userRepository;
+    public RegisterViewModel(){
+        this.userRepository = new UserRepository();
     }
 
     public void doRegister() {

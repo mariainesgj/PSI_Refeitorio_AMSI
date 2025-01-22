@@ -33,12 +33,7 @@ public class LoginActivity  extends AppCompatActivity {
         setSupportActionBar(binding.appBarHome.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        UserRepository repository =  new UserRepository(this);
-
-        GenericViewModelFactory<LoginViewModel, UserRepository> factory =
-                new GenericViewModelFactory<>(LoginViewModel.class, repository);
-
-        viewModel = new ViewModelProvider(this, factory).get(LoginViewModel.class);
+        viewModel = new ViewModelProvider(this).get(LoginViewModel.class);
 
         binding.setViewModel(viewModel);
 

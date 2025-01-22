@@ -32,11 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
         setSupportActionBar(binding.appBarRegister.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        UserRepository repository =  new UserRepository(this);
-        GenericViewModelFactory<RegisterViewModel, UserRepository>  factory =
-                new GenericViewModelFactory<>(RegisterViewModel.class, repository);
-
-        viewModel = new ViewModelProvider(this, factory).get(RegisterViewModel.class);
+        viewModel = new ViewModelProvider(this).get(RegisterViewModel.class);
         binding.setViewModel(viewModel);
 
         viewModel.getDoSuccess().observe(this, value -> {

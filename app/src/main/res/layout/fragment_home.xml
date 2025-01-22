@@ -1,14 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.activities.home.HomeFragment">
+<layout>
+    <data>
+        <variable
+            name="viewModel"
+            type="pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.PratoDiaViewModel" />
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+        <import type="android.view.View" />
+    </data>
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Home fragment" />
+        android:orientation="vertical"
+        tools:context=".ui.activities.home.HomeFragment">
 
-</FrameLayout>
+        <DatePicker
+            android:id="@+id/datePicker"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:datePickerMode="spinner"
+            android:calendarViewShown="false"
+        />
+
+
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="40dp"
+            android:indeterminate="true"
+            android:visibility="@{viewModel.loading ? View.VISIBLE : View.GONE}"
+            />
+
+
+        <ImageView
+            android:visibility="@{viewModel.loading ? View.GONE : View.VISIBLE}"
+            android:id="@+id/qrCode"
+            android:layout_width="match_parent"
+            android:layout_height="512dp"
+        />
+
+
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

@@ -28,6 +28,14 @@
                 android:textSize="34sp"
                 android:textStyle="normal" />
 
+
+            <Button
+                android:id="@+id/btnFaturas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Faturas"
+                />
+
             <EditText
                 android:id="@+id/inputUsername"
                 android:layout_width="match_parent"

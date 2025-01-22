@@ -26,8 +26,8 @@ public class LoginViewModel extends ViewModel {
     }
 
 
-    public LoginViewModel(UserRepository userRepository){
-        this.userRepository = userRepository;
+    public LoginViewModel(){
+        this.userRepository = new UserRepository();
     }
 
     public void doLogin(){

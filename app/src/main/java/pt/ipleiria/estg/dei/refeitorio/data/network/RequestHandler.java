@@ -14,16 +14,44 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
 import java.util.Map;
 
+import pt.ipleiria.estg.dei.refeitorio.helpers.SharedPref;
+
 public class RequestHandler<T> {
+
+    private static Map<String, String> getCustomHeaders(){
+        Map<String, String> params = new HashMap<>();
+        String token  = SharedPref.getItem(SharedPref.TOKEN, String.class);
+        if(token != null){
+            params.put("Authorization", "Bearer "+ token);
+        }
+
+        return params;
+    }
+
+
     public static void fetchData(Context context, String url,
                                  final SuccessListener<String> onSuccess, final ErrorListener onError) {
         StringRequest stringRequest = new StringRequest(
                 Request.Method.GET, url,
                 onSuccess::onSuccess,
-                error -> onError.onError(error.getMessage() != null ? error.getMessage() : "An error occurred")
-        );
+                error -> {
+                    try {
+                        String response = new String(error.networkResponse.data);
+                        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
+                        onError.onError(json.get("message").getAsString());
+                    }catch (Exception e){
+                        onError.onError(error.getMessage() != null ? error.getMessage() : "An error occurred");
+                    }
+                }
+        ){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return getCustomHeaders();
+            }
+        };
 
         ApiClient.getInstance(context).addToRequestQueue(stringRequest);
     }
@@ -49,6 +77,11 @@ public class RequestHandler<T> {
                     }
                 }
         ) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return getCustomHeaders();
+            }
 
             @Override
             public byte[] getBody() throws AuthFailureError {
@@ -88,6 +121,11 @@ public class RequestHandler<T> {
         ) {
 
             @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return getCustomHeaders();
+            }
+
+            @Override
             public byte[] getBody() throws AuthFailureError {
                 return body.toString().getBytes(StandardCharsets.UTF_8);
             }
@@ -107,8 +145,21 @@ public class RequestHandler<T> {
         StringRequest postRequest = new StringRequest(
                 Request.Method.DELETE, url,
                 onSuccess::onSuccess,
-                error -> onError.onError(error.getMessage() != null ? error.getMessage() : "An error occurred")
+                error -> {
+                    try {
+                        String response = new String(error.networkResponse.data);
+                        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
+                        onError.onError(json.get("message").getAsString());
+                    }catch (Exception e){
+                        onError.onError(error.getMessage() != null ? error.getMessage() : "An error occurred");
+                    }
+                }
         ) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                return getCustomHeaders();
+            }
             @Override
             protected Map<String, String> getParams() {
                 return params;

@@ -2,10 +2,19 @@ package pt.ipleiria.estg.dei.refeitorio.ui.activities.home;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.zxing.WriterException;
+
 import pt.ipleiria.estg.dei.refeitorio.R;
+import pt.ipleiria.estg.dei.refeitorio.databinding.FragmentHomeBinding;
+import pt.ipleiria.estg.dei.refeitorio.helpers.QRCodeUtils;
+import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.FaturaViewModel;
+import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.PratoDiaViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -15,14 +24,9 @@ import pt.ipleiria.estg.dei.refeitorio.R;
  */
 public class HomeFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    FragmentHomeBinding binding;
+    PratoDiaViewModel viewModel;
 
     /**
      * Use this factory method to create a new instance of
@@ -30,14 +34,8 @@ public class HomeFragment extends Fragment {
      *
      * @return A new instance of fragment HomeFragment.
      */
-    // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance() {
-        HomeFragment fragment = new HomeFragment();
-        //Bundle args = new Bundle();
-        //args.putString(ARG_PARAM1, param1);
-        //args.putString(ARG_PARAM2, param2);
-        //fragment.setArguments(args);
-        return fragment;
+        return new HomeFragment();
     }
 
     public HomeFragment() {
@@ -47,16 +45,31 @@ public class HomeFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        binding = FragmentHomeBinding.inflate(inflater);
+        viewModel = new ViewModelProvider(this).get(PratoDiaViewModel.class);
+        binding.setViewModel(viewModel);
+
+        viewModel.getResult().observe(getViewLifecycleOwner(), result -> {
+            try {
+                binding.qrCode.setImageBitmap(QRCodeUtils.generateQRCode(String.format("{\"id\":\"%s\"}", result.id)));
+            } catch (WriterException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        return binding.getRoot();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.fetchPratoDia("2024-12-11");
+
     }
 }

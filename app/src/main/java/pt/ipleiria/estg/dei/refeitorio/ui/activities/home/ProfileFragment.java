@@ -1,9 +1,11 @@
 package pt.ipleiria.estg.dei.refeitorio.ui.activities.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import pt.ipleiria.estg.dei.refeitorio.R;
 import pt.ipleiria.estg.dei.refeitorio.data.models.User;
 import pt.ipleiria.estg.dei.refeitorio.helpers.SharedPref;
+import pt.ipleiria.estg.dei.refeitorio.ui.activities.FaturaActivity;
 import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.ProfileViewModel;
 
 /**
@@ -72,10 +75,20 @@ public class ProfileFragment extends Fragment {
             viewModel.getPostalCode().observe(getViewLifecycleOwner(), inputPostalCode::setText);
         }
 
+        Button btn = rootView.findViewById(R.id.btnFaturas);
+
+        btn.setOnClickListener(event -> {
+            intentToFaturas();
+        });
+
         return rootView;
     }
 
     public void doLogout(){
 
+    }
+
+    public void intentToFaturas(){
+        startActivity(new Intent(getActivity(), FaturaActivity.class));
     }
 }

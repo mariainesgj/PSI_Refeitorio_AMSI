@@ -17,6 +17,11 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activities.FaturaActivity"
+            android:exported="false"
+            android:label="@string/title_activity_fatura"
+            android:theme="@style/Theme.Refeitorio" />
+        <activity
             android:name=".ui.activities.home.HomeActivity"
             android:exported="false" />
         <activity

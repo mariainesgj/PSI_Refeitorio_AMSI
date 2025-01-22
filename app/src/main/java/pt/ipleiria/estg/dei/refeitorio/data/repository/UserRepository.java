@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import pt.ipleiria.estg.dei.refeitorio.MainApplication;
 import pt.ipleiria.estg.dei.refeitorio.data.models.User;
 import pt.ipleiria.estg.dei.refeitorio.data.network.ApiClient;
 import pt.ipleiria.estg.dei.refeitorio.data.network.ApiEndpoints;
@@ -20,11 +21,8 @@ import pt.ipleiria.estg.dei.refeitorio.data.network.RequestHandler;
 import pt.ipleiria.estg.dei.refeitorio.helpers.SharedPref;
 
 public class UserRepository {
-    private final Context context;
+    private final Context context = MainApplication.getContext();
 
-    public UserRepository(Context context) {
-        this.context = context;
-    }
 
     public void login(
             String login,
@@ -60,7 +58,7 @@ public class UserRepository {
                     onError.onError(errorMessage);
                 }
             } catch (JSONException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
                 onError.onError("Erro ao processar a resposta do servidor.");
             }
         }, onError);
@@ -109,7 +107,7 @@ public class UserRepository {
                 if (RequestHandler.checkIfSuccess(jsonResponse)) {
                     JSONObject data = jsonResponse.getJSONObject("data");
                     User user = new Gson().fromJson(data.getString("user"), User.class);
-                    String token = jsonResponse.getString("auth_key");
+                    String token = jsonResponse.getString("access_token");
                     SharedPref.setItem(SharedPref.TOKEN, token);
                     SharedPref.setItem(SharedPref.KEY_USER, user);
                     onSuccess.onSuccess(true);
