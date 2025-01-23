@@ -35,7 +35,7 @@ public class FaturaViewModel extends ViewModel {
                 result.postValue(response);
                 loading.postValue(false);
             },
-            error -> {
+            (error, status) -> {
                 loading.postValue(false);
             }
         );

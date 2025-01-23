@@ -35,4 +35,6 @@
     <string name="total_liquido">Total Liquido:\n %1$s €</string>
     <string name="total_iva">Total IVA:\n %1$s €</string>
     <string name="total">Total:\n %1$s €</string>
+    <string name="senha_used_info">Esta senha já foi utilizada!</string>
+    <string name="no_senha_info">Nenhuma senha adquirida!</string>
 </resources>

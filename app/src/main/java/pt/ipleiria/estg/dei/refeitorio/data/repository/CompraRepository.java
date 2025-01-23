@@ -15,6 +15,7 @@ import java.util.List;
 import pt.ipleiria.estg.dei.refeitorio.MainApplication;
 import pt.ipleiria.estg.dei.refeitorio.data.models.Fatura;
 import pt.ipleiria.estg.dei.refeitorio.data.models.User;
+import pt.ipleiria.estg.dei.refeitorio.data.network.ApiClient;
 import pt.ipleiria.estg.dei.refeitorio.data.network.ApiEndpoints;
 import pt.ipleiria.estg.dei.refeitorio.data.network.RequestHandler;
 
@@ -36,12 +37,13 @@ public class CompraRepository {
                     onSuccess.onSuccess(results);
                 }else {
                     String errorMessage = jsonResponse.optString("message", "Erro desconhecido");
-                    onError.onError(errorMessage);
+                    String statusMessage = jsonResponse.optString("status", ApiClient.RESULT_UNEXPECTED);
+                    onError.onError(errorMessage, statusMessage);
                 }
 
             }
             catch (Exception ex){
-                onError.onError("Erro ao processar a resposta do servidor.");
+                onError.onError("Erro ao processar a resposta do servidor.", ApiClient.RESULT_UNEXPECTED);
             }
         }, onError);
     }

@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -38,13 +39,7 @@ public class RequestHandler<T> {
                 Request.Method.GET, url,
                 onSuccess::onSuccess,
                 error -> {
-                    try {
-                        String response = new String(error.networkResponse.data);
-                        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-                        onError.onError(json.get("message").getAsString());
-                    }catch (Exception e){
-                        onError.onError(error.getMessage() != null ? error.getMessage() : "An error occurred");
-                    }
+                    handleError(error, onError);
                 }
         ){
             @Override
@@ -54,6 +49,16 @@ public class RequestHandler<T> {
         };
 
         ApiClient.getInstance(context).addToRequestQueue(stringRequest);
+    }
+
+    private static void handleError(VolleyError error, ErrorListener onError) {
+        try {
+            String response = new String(error.networkResponse.data);
+            JsonObject json = JsonParser.parseString(response).getAsJsonObject();
+            onError.onError(json.get("message").getAsString(), json.get("status").getAsString());
+        } catch (Exception e) {
+            onError.onError(error.getMessage() != null ? error.getMessage() : "An error occurred", ApiClient.RESULT_UNEXPECTED);
+        }
     }
 
     public static void postData(
@@ -68,13 +73,7 @@ public class RequestHandler<T> {
                 Request.Method.POST, url,
                 onSuccess::onSuccess,
                 error -> {
-                    try {
-                        String response = new String(error.networkResponse.data);
-                        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-                        onError.onError(json.get("message").getAsString());
-                    }catch (Exception e){
-                        onError.onError(error.getMessage() != null ? error.getMessage() : "An error occurred");
-                    }
+                    handleError(error, onError);
                 }
         ) {
 
@@ -110,13 +109,7 @@ public class RequestHandler<T> {
                 Request.Method.PUT, url,
                 onSuccess::onSuccess,
                 error -> {
-                    try {
-                        String response = new String(error.networkResponse.data);
-                        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-                        onError.onError(json.get("message").getAsString());
-                    }catch (Exception e){
-                        onError.onError(error.getMessage() != null ? error.getMessage() : "An error occurred");
-                    }
+                    handleError(error, onError);
                 }
         ) {
 
@@ -146,13 +139,7 @@ public class RequestHandler<T> {
                 Request.Method.DELETE, url,
                 onSuccess::onSuccess,
                 error -> {
-                    try {
-                        String response = new String(error.networkResponse.data);
-                        JsonObject json = JsonParser.parseString(response).getAsJsonObject();
-                        onError.onError(json.get("message").getAsString());
-                    }catch (Exception e){
-                        onError.onError(error.getMessage() != null ? error.getMessage() : "An error occurred");
-                    }
+                    handleError(error, onError);
                 }
         ) {
 
@@ -182,7 +169,7 @@ public class RequestHandler<T> {
     }
 
     public interface ErrorListener {
-        void onError(String error);
+        void onError(String error, String status);
     }
 }
 

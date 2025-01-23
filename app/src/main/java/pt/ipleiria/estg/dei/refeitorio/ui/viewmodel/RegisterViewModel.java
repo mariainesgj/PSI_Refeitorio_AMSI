@@ -65,7 +65,7 @@ public class RegisterViewModel extends ViewModel {
                     isRequestInProgress = false;
                     doSuccess.postValue(true);
                 },
-                error -> {
+                (error, status) -> {
                     isRequestInProgress = false;
                     errors.postValue(error);
                 }

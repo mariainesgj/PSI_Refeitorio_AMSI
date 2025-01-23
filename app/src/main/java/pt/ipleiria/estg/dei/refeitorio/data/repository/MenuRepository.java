@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import pt.ipleiria.estg.dei.refeitorio.MainApplication;
 import pt.ipleiria.estg.dei.refeitorio.data.models.Fatura;
 import pt.ipleiria.estg.dei.refeitorio.data.models.PratoDia;
+import pt.ipleiria.estg.dei.refeitorio.data.network.ApiClient;
 import pt.ipleiria.estg.dei.refeitorio.data.network.ApiEndpoints;
 import pt.ipleiria.estg.dei.refeitorio.data.network.RequestHandler;
 
@@ -29,12 +30,12 @@ public class MenuRepository {
                     onSuccess.onSuccess(results);
                 }else {
                     String errorMessage = jsonResponse.optString("message", "Erro desconhecido");
-                    onError.onError(errorMessage);
+                    onError.onError(errorMessage, jsonResponse.optString("status", ApiClient.RESULT_UNEXPECTED));
                 }
 
             }
             catch (Exception ex){
-                onError.onError("Erro ao processar a resposta do servidor.");
+                onError.onError("Erro ao processar a resposta do servidor.", ApiClient.RESULT_UNEXPECTED);
             }
         }, onError);
     }

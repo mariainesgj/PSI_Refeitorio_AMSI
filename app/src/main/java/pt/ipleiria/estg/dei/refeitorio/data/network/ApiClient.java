@@ -10,6 +10,10 @@ public class ApiClient {
     private final RequestQueue requestQueue;
 
     public static final String RESULT_SUCCESS = "success";
+    public static final String RESULT_EMPTY = "empty";
+    public static final String RESULT_UNEXPECTED = "unexpected";
+
+    public static final String RESULT_INVALID = "invalid";
 
     private ApiClient(Context context) {
         requestQueue = Volley.newRequestQueue(context.getApplicationContext());

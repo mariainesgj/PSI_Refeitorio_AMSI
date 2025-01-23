@@ -33,7 +33,7 @@ public class LoginViewModel extends ViewModel {
     public void doLogin(){
         userRepository.login(login.getValue(), password.getValue(), response -> {
             doSuccess.postValue(true);
-        }, error -> {
+        }, (error, status) -> {
             errors.postValue(error);
         });
     }

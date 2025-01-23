@@ -1,16 +1,23 @@
 package pt.ipleiria.estg.dei.refeitorio.ui.activities.home;
 
 import android.os.Bundle;
+
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.zxing.WriterException;
 
+import java.util.Locale;
+import java.util.Objects;
+
 import pt.ipleiria.estg.dei.refeitorio.R;
+import pt.ipleiria.estg.dei.refeitorio.data.network.ApiClient;
 import pt.ipleiria.estg.dei.refeitorio.databinding.FragmentHomeBinding;
 import pt.ipleiria.estg.dei.refeitorio.helpers.QRCodeUtils;
 import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.FaturaViewModel;
@@ -58,10 +65,44 @@ public class HomeFragment extends Fragment {
 
         viewModel.getResult().observe(getViewLifecycleOwner(), result -> {
             try {
-                binding.qrCode.setImageBitmap(QRCodeUtils.generateQRCode(String.format("{\"id\":\"%s\"}", result.id)));
+                binding.txtInfo.setVisibility(View.GONE);
+                if(result.lido == null){
+                    binding.qrCode.setImageBitmap(QRCodeUtils.generateQRCode(String.format("{\"id\":\"%s\"}", result.id)));
+                }else {
+                    binding.qrCode.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.senha_ementa_used));
+                    binding.txtInfo.setText(R.string.senha_used_info);
+                    binding.txtInfo.setVisibility(View.VISIBLE);
+                }
             } catch (WriterException e) {
                 throw new RuntimeException(e);
             }
+        });
+
+        viewModel.loading.observe(getViewLifecycleOwner(), isLoading -> {
+            if(isLoading){
+                binding.txtInfo.setVisibility(View.GONE);
+            }
+        });
+
+        viewModel.getError().observe(getViewLifecycleOwner(), error -> {
+            if(Objects.equals(error.second, ApiClient.RESULT_EMPTY)){
+                binding.qrCode.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.no_menu_selected));
+                binding.txtInfo.setText(R.string.no_senha_info);
+            }else{
+                binding.txtInfo.setText(error.first);
+                binding.qrCode.setImageDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.error_cloud_icon));
+            }
+            binding.txtInfo.setVisibility(View.VISIBLE);
+        });
+
+        binding.horizontalCalendar.setOnDateSelectListener( newDate -> {
+            viewModel.fetchPratoDia(String.format(
+                    Locale.getDefault(),
+                    "%d-%02d-%02d",
+                    newDate.year,
+                    newDate.monthNumber,
+                    newDate.day
+            ));
         });
 
         return binding.getRoot();
@@ -70,7 +111,6 @@ public class HomeFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        viewModel.fetchPratoDia("2024-12-11");
 
     }
 }

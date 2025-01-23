@@ -31,7 +31,7 @@ public class UserRepository {
             RequestHandler.ErrorListener onError
     ) {
         if (login == null || login.isEmpty() || password == null || password.isEmpty()) {
-            onError.onError("Username ou palavra-passe não podem estar vazios.");
+            onError.onError("Username ou palavra-passe não podem estar vazios.", ApiClient.RESULT_INVALID);
             return;
         }
 
@@ -55,11 +55,12 @@ public class UserRepository {
                     onSuccess.onSuccess(true);
                 } else {
                     String errorMessage = jsonResponse.optString("message", "Erro desconhecido");
-                    onError.onError(errorMessage);
+                    String statusMessage = jsonResponse.optString("status", ApiClient.RESULT_UNEXPECTED);
+                    onError.onError(errorMessage, statusMessage);
                 }
             } catch (JSONException e) {
                 //e.printStackTrace();
-                onError.onError("Erro ao processar a resposta do servidor.");
+                onError.onError("Erro ao processar a resposta do servidor.", ApiClient.RESULT_UNEXPECTED);
             }
         }, onError);
     }
@@ -85,7 +86,7 @@ public class UserRepository {
                 || phoneNumber == null || phoneNumber.isEmpty() || address == null || address.isEmpty()
                 || locale == null || locale.isEmpty() || postalCode == null || postalCode.isEmpty()
                 || role == null || role.isEmpty() || cozinha <= 0) {
-            onError.onError("Preencha todos os campos, por favor.");
+            onError.onError("Preencha todos os campos, por favor.",ApiClient.RESULT_INVALID);
             return;
         }
 
@@ -113,11 +114,12 @@ public class UserRepository {
                     onSuccess.onSuccess(true);
                 } else {
                     String errorMessage = jsonResponse.optString("message", "Erro desconhecido");
-                    onError.onError(errorMessage);
+                    String statusMessage = jsonResponse.optString("status", ApiClient.RESULT_UNEXPECTED);
+                    onError.onError(errorMessage, statusMessage);
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
-                onError.onError("Erro ao processar a resposta do servidor.");
+                onError.onError("Erro ao processar a resposta do servidor.", ApiClient.RESULT_UNEXPECTED);
             }
         }, onError);
     }

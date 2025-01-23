@@ -1,6 +1,7 @@
 package pt.ipleiria.estg.dei.refeitorio.ui.viewmodel;
 
 import android.util.Log;
+import android.util.Pair;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -18,8 +19,17 @@ public class PratoDiaViewModel extends ViewModel {
     public LiveData<PratoDia> getResult(){
         return result;
     }
-
     public MutableLiveData<Boolean> loading = new MutableLiveData<>(true);
+
+    /**
+     * 1 - Mensagem
+     * 2 - Status
+     */
+    private MutableLiveData<Pair<String, String>> error = new MutableLiveData<>();
+
+    public LiveData<Pair<String, String>> getError(){
+        return error;
+    }
 
     public PratoDiaViewModel(){
         this.repository = new MenuRepository();
@@ -31,9 +41,9 @@ public class PratoDiaViewModel extends ViewModel {
         repository.fetchPratoDoDia(date, response -> {
             result.postValue(response);
             loading.postValue(false);
-        }, error -> {
-            Log.i("TESTE", "fetchPratoDia: error");
+        }, (err, status) -> {
             loading.postValue(false);
+            error.postValue(new Pair<>(err, status));
         });
     }
 }
