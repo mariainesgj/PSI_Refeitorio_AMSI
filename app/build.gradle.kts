@@ -50,4 +50,7 @@ dependencies {
 
     // https://mvnrepository.com/artifact/com.google.zxing/core
     implementation("com.google.zxing:core:3.5.3")
+    implementation("io.github.b-sahana:horizontalcalendar:1.2.2")
+
+
 }

@@ -52,6 +52,7 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
         viewModel = new ViewModelProvider(this).get(PratoDiaViewModel.class);
         binding.setViewModel(viewModel);
 

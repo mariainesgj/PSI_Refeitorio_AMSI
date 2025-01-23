@@ -19,12 +19,7 @@ public class PratoDiaViewModel extends ViewModel {
         return result;
     }
 
-    private MutableLiveData<Boolean> loading = new MutableLiveData<>(false);
-
-
-    public LiveData<Boolean> getLoading(){
-        return loading;
-    }
+    public MutableLiveData<Boolean> loading = new MutableLiveData<>(true);
 
     public PratoDiaViewModel(){
         this.repository = new MenuRepository();

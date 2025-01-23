@@ -11,18 +11,23 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         tools:context=".ui.activities.home.HomeFragment">
 
-        <DatePicker
-            android:id="@+id/datePicker"
+        <com.sahana.horizontalcalendar.HorizontalCalendar
+            android:id="@+id/horizontalCalendar"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:datePickerMode="spinner"
-            android:calendarViewShown="false"
-        />
-
-
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            app:numOfDays="90"
+            app:setBgColor="@color/azul"
+            app:setSelectedBgColor="@color/white"
+            app:setTextColor="@color/white"
+            app:setSelectedTextColor="@color/dark_gray"
+            app:setDateTextSize="12sp"
+            app:setWeekTextSize="12sp"
+            app:setMonthTextSize="16sp"/>
 
         <ProgressBar
             android:layout_width="wrap_content"
@@ -37,8 +42,10 @@
         <ImageView
             android:visibility="@{viewModel.loading ? View.GONE : View.VISIBLE}"
             android:id="@+id/qrCode"
-            android:layout_width="match_parent"
-            android:layout_height="512dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="16dp"
+            android:layout_width="280dp"
+            android:layout_height="280dp"
         />
 
 
