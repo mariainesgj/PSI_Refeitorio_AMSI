@@ -29,6 +29,7 @@ public class FaturaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityFaturaBinding.inflate(getLayoutInflater());
+        binding.setLifecycleOwner(this);
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarHome.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);

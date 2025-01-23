@@ -1,14 +1,17 @@
 package pt.ipleiria.estg.dei.refeitorio.helpers;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
 
 public class DateUtils {
     public static SimpleDateFormat formatYYYYMMdd =  new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+    public static SimpleDateFormat formatddMMYYYY =  new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
     /**
      * Generates an array of dates based on the selected date,
@@ -34,5 +37,17 @@ public class DateUtils {
         }
 
         return dateRange;
+    }
+
+    public static String formatToddMMyyyy(String date){
+        try {
+           Date parsedDate = formatYYYYMMdd.parse(date);
+           if(parsedDate != null){
+               return formatddMMYYYY.format(parsedDate);
+           }
+           return date;
+        } catch (ParseException e) {
+            return date;
+        }
     }
 }

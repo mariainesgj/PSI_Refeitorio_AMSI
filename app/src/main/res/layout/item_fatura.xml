@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
-    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.appcompat.widget.LinearLayoutCompat
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <androidx.cardview.widget.CardView
             android:layout_margin="8dp"
@@ -13,13 +14,160 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:padding="10dp"
+                android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/txt_nfatura"
-                    android:layout_width="wrap_content"
+                <!-- Primeira Linha (ID e Data) -->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="TESTE"/>
+                    android:orientation="horizontal">
+
+                    <!-- Primeira Coluna (ID) -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_nfatura"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="ID"
+                            android:textAlignment="center"
+                            android:padding="8dp"
+                            android:background="#E0E0E0" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <!-- Segunda Coluna (Data) -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Data"
+                            android:textAlignment="center"
+                            android:padding="8dp"
+                            android:background="#E0E0E0" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <!-- Segunda Linha (Quatro Colunas Adicionais) -->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Nº Senha"
+                        android:padding="4dp"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Quantidade"
+                        android:padding="4dp"
+                        android:gravity="center" />
+
+                    <!-- Coluna 3 com valor -->
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Preço"
+                        android:padding="4dp"
+                        android:gravity="center" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Taxa IVA"
+                        android:padding="4dp"
+                        android:gravity="center" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+             <!--  Itens Inseridos Manualmente -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/linhasContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray"/>
+
+            <!-- Terceira Linha (Totais - Ilíquido, IVA e Total) -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <!-- Coluna Ilíquido -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_iliquido"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Total Ilíquido"
+                            android:padding="4dp"
+                            android:gravity="center" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <!-- Coluna IVA -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_iva"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Total IVA"
+                            android:padding="4dp"
+                            android:gravity="center" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    <!-- Coluna Total -->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/txt_total"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="Total Documento"
+                            android:padding="4dp"
+                            android:gravity="center" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 

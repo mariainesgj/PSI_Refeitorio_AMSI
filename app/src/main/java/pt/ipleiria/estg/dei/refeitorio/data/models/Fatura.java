@@ -15,6 +15,9 @@ public class Fatura{
     @SerializedName("total_doc")
     public String totalDoc;
 
+    public Linhas[] linhas;
+
+
     public int getId() {
         return id;
     }
@@ -55,6 +58,13 @@ public class Fatura{
         this.totalDoc = totalDoc;
     }
 
+    public Linhas[] getLinhas() {
+        return linhas;
+    }
+
+    public void setLinhas(Linhas[] linhas) {
+        this.linhas = linhas;
+    }
 
     @Override
     public boolean equals(Object o) {
