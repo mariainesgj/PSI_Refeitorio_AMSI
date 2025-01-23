@@ -17,8 +17,10 @@ import java.util.Locale;
 import java.util.Objects;
 
 import pt.ipleiria.estg.dei.refeitorio.R;
+import pt.ipleiria.estg.dei.refeitorio.data.models.PratoDia;
 import pt.ipleiria.estg.dei.refeitorio.data.network.ApiClient;
 import pt.ipleiria.estg.dei.refeitorio.databinding.FragmentHomeBinding;
+import pt.ipleiria.estg.dei.refeitorio.helpers.DateUtils;
 import pt.ipleiria.estg.dei.refeitorio.helpers.QRCodeUtils;
 import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.FaturaViewModel;
 import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.PratoDiaViewModel;
@@ -66,6 +68,7 @@ public class HomeFragment extends Fragment {
         viewModel.getResult().observe(getViewLifecycleOwner(), result -> {
             try {
                 binding.txtInfo.setVisibility(View.GONE);
+                binding.ementaContent.getRoot().setVisibility(View.VISIBLE);
                 if(result.lido == null){
                     binding.qrCode.setImageBitmap(QRCodeUtils.generateQRCode(String.format("{\"id\":\"%s\"}", result.id)));
                 }else {
@@ -73,6 +76,16 @@ public class HomeFragment extends Fragment {
                     binding.txtInfo.setText(R.string.senha_used_info);
                     binding.txtInfo.setVisibility(View.VISIBLE);
                 }
+
+                binding.ementaContent.txtDate.setText(DateUtils.formatToddMMyyyy(result.data));
+                binding.ementaContent.txtSopa.setText(result.nomeSopa);
+                binding.ementaContent.txtPrato.setText(result.nomePrato);
+
+
+                int color  = result.tipoPrato.equals(PratoDia.PRATO_NORMAL) ? R.color.azul : com.sahana.horizontalcalendar.R.color.green;
+                binding.ementaContent.cardContent.setCardBackgroundColor(AppCompatResources.getColorStateList(requireContext(), color));
+
+
             } catch (WriterException e) {
                 throw new RuntimeException(e);
             }
@@ -80,6 +93,7 @@ public class HomeFragment extends Fragment {
 
         viewModel.loading.observe(getViewLifecycleOwner(), isLoading -> {
             if(isLoading){
+                binding.ementaContent.getRoot().setVisibility(View.GONE);
                 binding.txtInfo.setVisibility(View.GONE);
             }
         });

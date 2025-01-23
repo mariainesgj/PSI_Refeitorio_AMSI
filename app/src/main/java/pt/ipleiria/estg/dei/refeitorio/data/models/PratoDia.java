@@ -31,6 +31,10 @@ public class PratoDia{
     @SerializedName("tipo_prato")
     public String tipoPrato;
 
+
+    public static final String PRATO_NORMAL = "prato normal";
+    public static final String PRATO_VEGERATIANO = "prato vegetariano";
+
     public int getId() {
         return id;
     }

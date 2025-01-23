@@ -37,4 +37,11 @@
     <string name="total">Total:\n %1$s €</string>
     <string name="senha_used_info">Esta senha já foi utilizada!</string>
     <string name="no_senha_info">Nenhuma senha adquirida!</string>
+    <string name="sopa_label">Sopa:</string>
+    <string name="prato_principal_label">Prato Principal:</string>
+    <string name="prato_vegetariano_label">Prato Vegetariano:</string>
+    <string name="prato_label">Prato</string>
+    <string name="principal">Principal</string>
+    <string name="vegetariano">Vegetariano</string>
+    <string name="nao_marcado">Não Marcado</string>
 </resources>

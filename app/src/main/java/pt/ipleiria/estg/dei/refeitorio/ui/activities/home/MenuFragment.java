@@ -2,13 +2,24 @@ package pt.ipleiria.estg.dei.refeitorio.ui.activities.home;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.MenuHost;
+import androidx.core.view.MenuProvider;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
 import pt.ipleiria.estg.dei.refeitorio.R;
+import pt.ipleiria.estg.dei.refeitorio.databinding.FragmentMenuBinding;
+import pt.ipleiria.estg.dei.refeitorio.ui.adapters.MenuEmentaAdapter;
+import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.MenuViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,14 +28,9 @@ import pt.ipleiria.estg.dei.refeitorio.R;
  */
 public class MenuFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    FragmentMenuBinding binding;
+    MenuViewModel viewModel;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -43,16 +49,61 @@ public class MenuFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+
+
+        binding = FragmentMenuBinding.inflate(inflater);
+        binding.setLifecycleOwner(getViewLifecycleOwner());
+        viewModel = new ViewModelProvider(this).get(MenuViewModel.class);
+        binding.setViewModel(viewModel);
+
+        ((AppCompatActivity)requireActivity()).setSupportActionBar(binding.appBarHome.toolbar);
+
+
+        viewModel.getResult().observe(getViewLifecycleOwner(), result-> {
+            binding.recyclerView.setAdapter(new MenuEmentaAdapter(result, (item, option) -> {
+                switch (option){
+                    case PRINCIPAL:
+                        //TODO Mostrar dialog perguntando se quer ad
+                        break;
+                    case VEGETARIANO:
+
+                        //TODO Mostrar dialog perguntando se quer add
+                        break;
+                    case NAO_MARCADO:
+                        //TODO Mostrar dialog perguntando se quer remover
+                        break;
+                }
+            }));
+        });
+
+
+        MenuHost menuHost = requireActivity();
+        menuHost.addMenuProvider(new MenuProvider() {
+            @Override
+            public void onCreateMenu(@NonNull Menu menu, @NonNull MenuInflater menuInflater) {
+                menuInflater.inflate(R.menu.ementa_menu_options, menu);
+            }
+
+            @Override
+            public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+                return false;
+            }
+        }, getViewLifecycleOwner());
+
+
+        return binding.getRoot();
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        viewModel.fetchEmentaMenu();
     }
 }

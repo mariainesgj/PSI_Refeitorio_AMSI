@@ -8,4 +8,7 @@ public class ApiEndpoints {
     public static final String FATURA_FETCH = BASE_URL + "/fatura/by-user";
 
     public static final String PRATO_DIA_FETCH = BASE_URL + "/senha/pratos-sopa?data=%s";
+
+
+    public static final String PRATOS_SENHAS_FETCH = BASE_URL + "/ementa/pratos-sopa-com-senhas";
 }

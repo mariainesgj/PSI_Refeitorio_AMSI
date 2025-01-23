@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:cardBackgroundColor="@color/azul"
+        >
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:id="@+id/txtDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:textColor="@color/white"
+                    android:gravity="center"
+                    android:text="23/01/2025"
+                    />
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="@string/sopa_label"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtSopa"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:text="Creme de Cenoura"
+                        />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="@string/prato_principal_label"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtPratoPrincipal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:text="Picanha com Arroz e Feijão "
+                        />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:text="@string/prato_vegetariano_label"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtPratoVegerariano"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:layout_marginStart="8dp"
+                        android:textColor="@color/white"
+                        android:gravity="center"
+                        android:textSize="16sp"
+                        android:text="Salada de Tomate"
+                        />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnPrincipal"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:backgroundTint="@color/white"
+                        android:textColor="@color/dark_gray"
+                        android:padding="4dp"
+                        android:textSize="14sp"
+                        android:text="@string/principal"
+                        />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnVegetariano"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:backgroundTint="@color/white"
+                        android:textColor="@color/dark_gray"
+                        android:padding="12dp"
+                        android:textSize="14sp"
+                        android:text="@string/vegetariano"
+                        />
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnNaoMarcado"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:backgroundTint="@color/white"
+                        android:textColor="@color/dark_gray"
+                        android:padding="12dp"
+                        android:textSize="14sp"
+                        android:text="@string/nao_marcado"
+                        />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
