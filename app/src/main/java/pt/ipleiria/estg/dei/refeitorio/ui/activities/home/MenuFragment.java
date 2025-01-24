@@ -3,6 +3,7 @@ package pt.ipleiria.estg.dei.refeitorio.ui.activities.home;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.MenuHost;
 import androidx.core.view.MenuProvider;
@@ -66,17 +67,40 @@ public class MenuFragment extends Fragment {
 
 
         viewModel.getResult().observe(getViewLifecycleOwner(), result-> {
+
             binding.recyclerView.setAdapter(new MenuEmentaAdapter(result, (item, option) -> {
                 switch (option){
                     case PRINCIPAL:
-                        //TODO Mostrar dialog perguntando se quer ad
+                        showConfirmationDialog(
+                                "Adicionar Menu Principal",
+                                "Pretende adicionar esta senha de Menu Principal ao seu carrinho?",
+                                () -> {
+                                    viewModel.addCarrinhoLinha(item.id, item.pratoNormalId);
+                                }
+                        );
                         break;
                     case VEGETARIANO:
-
-                        //TODO Mostrar dialog perguntando se quer add
+                        showConfirmationDialog(
+                                "Adiconar Menu Vegetariano",
+                                "Pretende adicionar esta senha de Menu Vegetariano ao seu carrinho?",
+                                () -> {
+                                    viewModel.addCarrinhoLinha(item.id, item.pratoVegetarianoId);
+                                }
+                        );
                         break;
                     case NAO_MARCADO:
-                        //TODO Mostrar dialog perguntando se quer remover
+                        if(item.linhaCarrinhoNormalId == null && item.linhaCarrinhoVegetarianoId == null){
+                            return;
+                        }
+                        showConfirmationDialog(
+                                "Remover Menu",
+                                "Pretende remover esta senha do seu carrinho?",
+                                () -> {
+                                    viewModel.removeCarrinhoLinha(
+                                        item.linhaCarrinhoNormalId != null ? item.linhaCarrinhoNormalId : item.linhaCarrinhoVegetarianoId
+                                    );
+                                }
+                        );
                         break;
                 }
             }));
@@ -105,5 +129,18 @@ public class MenuFragment extends Fragment {
     public void onResume() {
         super.onResume();
         viewModel.fetchEmentaMenu();
+    }
+
+    private void showConfirmationDialog(String title, String message, Runnable onConfirm) {
+        new AlertDialog.Builder(requireContext())
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Sim", (dialog, which) -> {
+                    if (onConfirm != null) {
+                        onConfirm.run();
+                    }
+                })
+                .setNegativeButton("Não", null)
+                .show();
     }
 }

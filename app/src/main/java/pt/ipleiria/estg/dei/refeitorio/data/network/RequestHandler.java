@@ -16,6 +16,7 @@ import org.json.JSONObject;
 
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import pt.ipleiria.estg.dei.refeitorio.helpers.SharedPref;
@@ -84,11 +85,17 @@ public class RequestHandler<T> {
 
             @Override
             public byte[] getBody() throws AuthFailureError {
+                if(body == null){
+                    return super.getBody();
+                }
                 return body.toString().getBytes(StandardCharsets.UTF_8);
             }
 
             @Override
-            protected Map<String, String> getParams() {
+            protected Map<String, String> getParams() throws AuthFailureError {
+                if (params == null) {
+                    return super.getParams();
+                }
                 return params;
             }
         };
@@ -120,11 +127,17 @@ public class RequestHandler<T> {
 
             @Override
             public byte[] getBody() throws AuthFailureError {
+                if(body == null){
+                    return new byte[0];
+                }
                 return body.toString().getBytes(StandardCharsets.UTF_8);
             }
 
             @Override
-            protected Map<String, String> getParams() {
+            protected Map<String, String> getParams() throws AuthFailureError {
+                if (params == null) {
+                    return super.getParams();
+                }
                 return params;
             }
         };
@@ -149,6 +162,9 @@ public class RequestHandler<T> {
             }
             @Override
             protected Map<String, String> getParams() {
+                if (params == null) {
+                    return new HashMap<>();
+                }
                 return params;
             }
         };

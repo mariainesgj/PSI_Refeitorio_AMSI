@@ -37,6 +37,25 @@ public class MenuViewModel extends ViewModel {
     }
 
 
+    public void addCarrinhoLinha(Integer ementaId, Integer pratoId){
+        loading.postValue(true);
+        compraRepository.postAddCarrinhoLinha(ementaId, pratoId, response -> {
+            fetchEmentaMenu();
+        }, (error, status) -> {
+            loading.postValue(false);
+        });
+    }
+
+
+    public void removeCarrinhoLinha(Integer id){
+        loading.postValue(true);
+        compraRepository.deleteCarrinhoLinha(id, response -> {
+            fetchEmentaMenu();
+        }, (error, status) -> {
+            loading.postValue(false);
+        });
+    }
+
 
 
 }

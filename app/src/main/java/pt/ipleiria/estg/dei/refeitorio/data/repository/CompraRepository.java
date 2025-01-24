@@ -10,9 +10,12 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import pt.ipleiria.estg.dei.refeitorio.MainApplication;
+import pt.ipleiria.estg.dei.refeitorio.data.models.Carrinho;
 import pt.ipleiria.estg.dei.refeitorio.data.models.EmentaMenu;
 import pt.ipleiria.estg.dei.refeitorio.data.models.Fatura;
 import pt.ipleiria.estg.dei.refeitorio.data.models.User;
@@ -70,5 +73,92 @@ public class CompraRepository {
                 onError.onError("Erro ao processar a resposta do servidor.", ApiClient.RESULT_UNEXPECTED);
             }
         }, onError);
+    }
+
+
+    public void fetchCarrinho(RequestHandler.SuccessListener<Carrinho> onSuccess, RequestHandler.ErrorListener onError){
+        RequestHandler.fetchData(context, ApiEndpoints.CARRINHO_FETCH, response -> {
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
+                if (RequestHandler.checkIfSuccess(jsonResponse)) {
+                    JSONObject data = jsonResponse.getJSONObject("data");
+
+                    Carrinho results =  new Gson().fromJson(data.toString(), Carrinho.class);
+
+                    onSuccess.onSuccess(results);
+                }else {
+                    String errorMessage = jsonResponse.optString("message", "Erro desconhecido");
+                    String statusMessage = jsonResponse.optString("status", ApiClient.RESULT_UNEXPECTED);
+                    onError.onError(errorMessage, statusMessage);
+                }
+
+            }
+            catch (Exception ex){
+                onError.onError("Erro ao processar a resposta do servidor.", ApiClient.RESULT_UNEXPECTED);
+            }
+        }, onError);
+    }
+
+
+    public void postAddCarrinhoLinha(
+            Integer ementaId,
+            Integer pratoId,
+            RequestHandler.SuccessListener<Boolean> onSuccess,
+            RequestHandler.ErrorListener onError
+    ){
+
+
+        HashMap<String, String> params = new HashMap<>();
+
+        params.put("ementa_id", ementaId.toString());
+        params.put("prato_id", pratoId.toString());
+
+
+        RequestHandler.postData(
+            context,
+            ApiEndpoints.CARRINHO_ADD_ITEM_POST,
+            null,
+            params,
+        response -> {
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
+                if (RequestHandler.checkIfSuccess(jsonResponse)) {
+                    onSuccess.onSuccess(true);
+                }else {
+                    String errorMessage = jsonResponse.optString("message", "Erro desconhecido");
+                    String statusMessage = jsonResponse.optString("status", ApiClient.RESULT_UNEXPECTED);
+                    onError.onError(errorMessage, statusMessage);
+                }
+            }
+            catch (Exception ex){
+                onError.onError("Erro ao processar a resposta do servidor.", ApiClient.RESULT_UNEXPECTED);
+            }
+        }, onError);
+    }
+
+    public void deleteCarrinhoLinha(
+            Integer linhaId,
+            RequestHandler.SuccessListener<Boolean> onSuccess,
+            RequestHandler.ErrorListener onError
+    ){
+        RequestHandler.deleteData(
+                context,
+                String.format(ApiEndpoints.CARRINHO_EXCLUIR_ITEM_DELETE, linhaId.toString()),
+                null,
+                response -> {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        if (RequestHandler.checkIfSuccess(jsonResponse)) {
+                            onSuccess.onSuccess(true);
+                        }else {
+                            String errorMessage = jsonResponse.optString("message", "Erro desconhecido");
+                            String statusMessage = jsonResponse.optString("status", ApiClient.RESULT_UNEXPECTED);
+                            onError.onError(errorMessage, statusMessage);
+                        }
+                    }
+                    catch (Exception ex){
+                        onError.onError("Erro ao processar a resposta do servidor.", ApiClient.RESULT_UNEXPECTED);
+                    }
+                }, onError);
     }
 }

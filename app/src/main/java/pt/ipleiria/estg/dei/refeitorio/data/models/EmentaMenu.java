@@ -8,7 +8,7 @@ public class EmentaMenu{
     public int id;
 
     @SerializedName("cozinha_id")
-    public int cozinhaId;
+    public Integer cozinhaId;
 
     public String data;
 
@@ -28,7 +28,7 @@ public class EmentaMenu{
     public String sopaNome;
 
     @SerializedName("senha_id")
-    public int senhaId;
+    public Integer senhaId;
 
     @SerializedName("senha_prato")
     public int senhaPrato;
@@ -40,10 +40,10 @@ public class EmentaMenu{
     public String senhaPratoTipo;
 
     @SerializedName("linha_carrinho_normal_id")
-    public int linhaCarrinhoNormalId;
+    public Integer linhaCarrinhoNormalId;
 
     @SerializedName("linha_carrinho_vegetariano_id")
-    public int linhaCarrinhoVegetarianoId;
+    public Integer linhaCarrinhoVegetarianoId;
 
     @SerializedName("carrinho_status")
     public String carrinhoStatus;

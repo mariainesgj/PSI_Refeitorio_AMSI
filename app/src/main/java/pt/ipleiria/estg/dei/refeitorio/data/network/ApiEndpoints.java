@@ -9,6 +9,12 @@ public class ApiEndpoints {
 
     public static final String PRATO_DIA_FETCH = BASE_URL + "/senha/pratos-sopa?data=%s";
 
-
     public static final String PRATOS_SENHAS_FETCH = BASE_URL + "/ementa/pratos-sopa-com-senhas";
+
+    public static final String CARRINHO_FETCH = BASE_URL + "/carrinho/carrinho-ativo";
+
+    public static final String CARRINHO_ADD_ITEM_POST = BASE_URL + "/linhascarrinho/adicionar-item";
+
+    public static final String CARRINHO_EXCLUIR_ITEM_DELETE = BASE_URL + "/linhascarrinho/excluir-item?id=%s" +
+            "";
 }
