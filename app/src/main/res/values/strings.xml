@@ -46,4 +46,6 @@
     <string name="nao_marcado">Não Marcado</string>
     <string name="edit_senha_tip">Para editar o menu escolhido acedar a aplicação WEB</string>
     <string name="menu_tip">Selecione a ementa desejada e conclua a compra no carrinho</string>
+    <string name="carrinho_title">Carrinho</string>
+    <string name="finish_compra">Finalizar</string>
 </resources>

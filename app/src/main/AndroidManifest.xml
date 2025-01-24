@@ -17,6 +17,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:label="@string/carrinho_title"
+            android:name=".ui.activities.CarrinhoActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activities.FaturaActivity"
             android:exported="false"
             android:label="@string/title_activity_fatura"

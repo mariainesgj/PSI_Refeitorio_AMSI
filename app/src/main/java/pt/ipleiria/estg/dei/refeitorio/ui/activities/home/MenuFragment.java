@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.refeitorio.ui.activities.home;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 
 import pt.ipleiria.estg.dei.refeitorio.R;
 import pt.ipleiria.estg.dei.refeitorio.databinding.FragmentMenuBinding;
+import pt.ipleiria.estg.dei.refeitorio.ui.activities.CarrinhoActivity;
 import pt.ipleiria.estg.dei.refeitorio.ui.adapters.MenuEmentaAdapter;
 import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.MenuViewModel;
 
@@ -116,6 +118,11 @@ public class MenuFragment extends Fragment {
 
             @Override
             public boolean onMenuItemSelected(@NonNull MenuItem menuItem) {
+
+                if(menuItem.getItemId() == R.id.cart){
+                    startActivity(new Intent(getActivity(), CarrinhoActivity.class));
+                }
+
                 return false;
             }
         }, getViewLifecycleOwner());
