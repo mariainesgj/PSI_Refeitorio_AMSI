@@ -145,8 +145,21 @@
             android:text="Guardar Alterações"
             android:textColor="#FFFFFF"
             android:textAllCaps="false"
-            android:paddingVertical="12dp"
-            android:onClick="@{() -> viewModel.doLogout()}" />
+            android:paddingVertical="12dp"/>
+
+
+
+        <TextView
+            android:id="@+id/txtLogout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:padding="12dp"
+            android:textColor="@color/red"
+            android:text="@string/logout"
+        />
 
     </LinearLayout>
 

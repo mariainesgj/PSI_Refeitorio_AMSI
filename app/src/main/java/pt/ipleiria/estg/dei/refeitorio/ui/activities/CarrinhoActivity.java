@@ -14,6 +14,7 @@ import java.util.Objects;
 import pt.ipleiria.estg.dei.refeitorio.R;
 import pt.ipleiria.estg.dei.refeitorio.data.models.LinhasSimple;
 import pt.ipleiria.estg.dei.refeitorio.databinding.ActivityCarrinhoBinding;
+import pt.ipleiria.estg.dei.refeitorio.ui.adapters.CarrinhoLinhaAdapter;
 import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.CarrinhoViewModel;
 
 public class CarrinhoActivity extends AppCompatActivity {
@@ -36,13 +37,28 @@ public class CarrinhoActivity extends AppCompatActivity {
 
 
         viewModel.getResult().observe(this, result -> {
+            binding.btnCheckout.setEnabled(true);
             binding.txtId.setText(String.valueOf(result.id));
             binding.txtNumero.setText(String.valueOf(result.numero));
 
             double subTotal = result.getLinhas().length * 3.5;
-
             binding.txtSubTotal.setText(String.format("%s €", subTotal));
+
+            if(result.getLinhas().length == 0){
+                binding.btnCheckout.setEnabled(false);
+            }
+
+            binding.recyclerView.setAdapter(new CarrinhoLinhaAdapter(result.linhas));
         });
+
+        binding.btnCheckout.setOnClickListener(event -> {
+            viewModel.postCheckout(reponse->{
+                finish();
+            }, (message, status) -> {
+                //TODO Show error
+            });
+        });
+
     }
 
     @Override
@@ -57,6 +73,8 @@ public class CarrinhoActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        viewModel.fetchCarrinho();
+        viewModel.fetchCarrinho((error, status) -> {
+            binding.btnCheckout.setEnabled(false);
+        });
     }
 }

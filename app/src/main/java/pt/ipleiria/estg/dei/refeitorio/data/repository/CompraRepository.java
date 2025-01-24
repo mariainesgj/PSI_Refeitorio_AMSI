@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 
 import org.json.JSONArray;
@@ -144,6 +145,44 @@ public class CompraRepository {
         RequestHandler.deleteData(
                 context,
                 String.format(ApiEndpoints.CARRINHO_EXCLUIR_ITEM_DELETE, linhaId.toString()),
+                null,
+                response -> {
+                    try {
+                        JSONObject jsonResponse = new JSONObject(response);
+                        if (RequestHandler.checkIfSuccess(jsonResponse)) {
+                            onSuccess.onSuccess(true);
+                        }else {
+                            String errorMessage = jsonResponse.optString("message", "Erro desconhecido");
+                            String statusMessage = jsonResponse.optString("status", ApiClient.RESULT_UNEXPECTED);
+                            onError.onError(errorMessage, statusMessage);
+                        }
+                    }
+                    catch (Exception ex){
+                        onError.onError("Erro ao processar a resposta do servidor.", ApiClient.RESULT_UNEXPECTED);
+                    }
+                }, onError);
+    }
+
+
+    public void postCheckout(
+            String cardNumber,
+            String expirationDate,
+            String securityCode,
+            String cardHolder,
+            RequestHandler.SuccessListener<Boolean> onSuccess,
+            RequestHandler.ErrorListener onError
+    ){
+        JsonObject json = new JsonObject();
+        json.addProperty("cardNumber", cardNumber);
+        json.addProperty("expirationDate", expirationDate);
+        json.addProperty("securityCode", securityCode);
+        json.addProperty("cardHolder", cardHolder);
+
+
+        RequestHandler.postData(
+                context,
+                ApiEndpoints.CHECKOUT_POST,
+                json,
                 null,
                 response -> {
                     try {

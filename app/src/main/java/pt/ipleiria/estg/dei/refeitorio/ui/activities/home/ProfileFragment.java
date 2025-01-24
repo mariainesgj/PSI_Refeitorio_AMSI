@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
@@ -14,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import pt.ipleiria.estg.dei.refeitorio.R;
 import pt.ipleiria.estg.dei.refeitorio.data.models.User;
 import pt.ipleiria.estg.dei.refeitorio.helpers.SharedPref;
+import pt.ipleiria.estg.dei.refeitorio.ui.activities.ChooseActivity;
 import pt.ipleiria.estg.dei.refeitorio.ui.activities.FaturaActivity;
 import pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.ProfileViewModel;
 
@@ -64,6 +66,7 @@ public class ProfileFragment extends Fragment {
         EditText inputStreet = rootView.findViewById(R.id.inputStreet);
         EditText inputLocal = rootView.findViewById(R.id.inputLocal);
         EditText inputPostalCode = rootView.findViewById(R.id.inputPostalCode);
+        TextView txtLogout = rootView.findViewById(R.id.txtLogout);
 
         if (viewModel != null) {
             viewModel.getUsername().observe(getViewLifecycleOwner(), inputUsername::setText);
@@ -79,6 +82,13 @@ public class ProfileFragment extends Fragment {
 
         btn.setOnClickListener(event -> {
             intentToFaturas();
+        });
+
+        txtLogout.setOnClickListener(event -> {
+            SharedPref.logout();
+            Intent intent  = new Intent(requireActivity(), ChooseActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
         });
 
         return rootView;

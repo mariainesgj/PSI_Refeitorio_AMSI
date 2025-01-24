@@ -15,6 +15,7 @@ public class ApiEndpoints {
 
     public static final String CARRINHO_ADD_ITEM_POST = BASE_URL + "/linhascarrinho/adicionar-item";
 
-    public static final String CARRINHO_EXCLUIR_ITEM_DELETE = BASE_URL + "/linhascarrinho/excluir-item?id=%s" +
-            "";
+    public static final String CARRINHO_EXCLUIR_ITEM_DELETE = BASE_URL + "/linhascarrinho/excluir-item?id=%s";
+
+    public static final String CHECKOUT_POST = BASE_URL + "/carrinho/checkout";
 }

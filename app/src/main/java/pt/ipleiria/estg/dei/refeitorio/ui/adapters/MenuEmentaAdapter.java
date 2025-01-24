@@ -16,7 +16,7 @@ import pt.ipleiria.estg.dei.refeitorio.databinding.ItemEmentaMenuBinding;
 import pt.ipleiria.estg.dei.refeitorio.helpers.DateUtils;
 
 public class MenuEmentaAdapter extends RecyclerView.Adapter<MenuEmentaAdapter.ViewHolder>{
-    private EmentaMenu[] list;
+    public EmentaMenu[] list;
 
     private Context context;
 

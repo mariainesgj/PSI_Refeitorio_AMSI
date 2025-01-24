@@ -1,5 +1,6 @@
 package pt.ipleiria.estg.dei.refeitorio.ui.activities.home;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -55,6 +56,7 @@ public class MenuFragment extends Fragment {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

@@ -1,96 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewModel"
             type="pt.ipleiria.estg.dei.refeitorio.ui.viewmodel.CarrinhoViewModel" />
     </data>
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.activities.CarrinhoActivity">
 
-        <include
-            android:id="@+id/app_bar_home"
-            layout="@layout/app_bar_home"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/carrinhoInfoContent"
-            android:layout_marginTop="24dp"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:paddingHorizontal="24dp"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toBottomOf="@id/app_bar_home"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <include
+                android:id="@+id/app_bar_home"
+                layout="@layout/app_bar_home"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="ID:"
-                />
-
-            <TextView
-                android:id="@+id/txtId"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:textStyle="bold"
-                android:text="Número:"
-                />
-
-            <TextView
-                android:id="@+id/txtNumero"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:textStyle="bold"
-                android:text="Subtotal:"
-                />
-
-            <TextView
-                android:id="@+id/txtSubTotal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".ui.activities.CarrinhoActivity">
 
 
 
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/carrinhoInfoContent"
+                    android:layout_marginTop="24dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="24dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent">
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:text="ID:"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtId"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:textStyle="bold"
+                        android:text="Número:"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtNumero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        />
+
+
+
+
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/headers"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    app:layout_constraintTop_toBottomOf="@id/carrinhoInfoContent">
+
+                    <!-- Espaço para valor da Coluna 1 -->
+                    <TextView
+                        android:id="@+id/txt_prato"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:padding="8dp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        android:text="@string/prato_label"
+                        />
+
+                    <!-- Espaço para valor da Coluna 2 -->
+                    <TextView
+                        android:id="@+id/txt_date"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/data"
+                        android:padding="8dp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        />
+
+                    <!-- Espaço para valor da Coluna 3 -->
+                    <TextView
+                        android:id="@+id/txt_preco"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/preco"
+                        android:padding="8dp"
+                        android:textStyle="bold"
+                        android:gravity="center"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="8dp"
+                    tools:listitem="@layout/item_carrinho_linha"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/headers"/>
+
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/subtotal"
+                    app:layout_constraintTop_toBottomOf="@id/recyclerView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:textStyle="bold"
+                        android:text="Subtotal:"
+                        />
+
+                    <TextView
+                        android:id="@+id/txtSubTotal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center"
+                        android:layout_marginStart="8dp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <LinearLayout
+                    android:id="@+id/campos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/subtotal"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:orientation="vertical"
+                    >
+
+                    <EditText
+                        android:id="@+id/inputCardNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="24dp"
+                        android:backgroundTint="#50A9B4"
+                        android:text="@={viewModel.carNumber}"
+                        android:hint="Nº do cartão"
+                        android:inputType="text"
+                        android:padding="12dp" />
+
+                    <EditText
+                        android:id="@+id/inputValidade"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="24dp"
+                        android:backgroundTint="#50A9B4"
+                        android:text="@={viewModel.expirationDate}"
+                        android:hint="Validade"
+                        android:inputType="text"
+                        android:padding="12dp" />
+
+                    <EditText
+                        android:id="@+id/inputCódigo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="24dp"
+                        android:text="@={viewModel.securityCode}"
+                        android:backgroundTint="#50A9B4"
+                        android:hint="Código de Segurança"
+                        android:inputType="text"
+                        android:padding="12dp" />
+
+                    <EditText
+                        android:id="@+id/inputTitular"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="24dp"
+                        android:text="@={viewModel.cardHolder}"
+                        android:backgroundTint="#50A9B4"
+                        android:hint="Titular"
+                        android:inputType="text"
+                        android:padding="12dp" />
+
+                </LinearLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnCheckout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/campos"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/finish_compra"
+                    />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
         </androidx.appcompat.widget.LinearLayoutCompat>
 
 
-        <com.google.android.material.button.MaterialButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/carrinhoInfoContent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:text="@string/finish_compra"
-            />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
