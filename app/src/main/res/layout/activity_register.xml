@@ -158,14 +158,15 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginTop="16dp" />
 
+
             <Spinner
                 android:id="@+id/roleSpinner"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
-                android:entries="@array/roles_array"
-                android:backgroundTint="#50A9B4"
+                android:entries="@{viewModel.roles}"
+                android:selectedItemPosition="@={viewModel.roleIndex}"
                 app:layout_constraintTop_toBottomOf="@id/inputPostalCode"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -173,12 +174,12 @@
                 android:padding="8dp" />
 
             <Spinner
-                android:id="@+id/roleSpinner2"
-                android:layout_width="wrap_content"
+                android:id="@+id/spinnerCozinha"
+                android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
-                android:entries="@array/cozinha_array"
+                android:selectedItemPosition="@={viewModel.cozinhaIndex}"
                 android:backgroundTint="#50A9B4"
                 app:layout_constraintTop_toBottomOf="@id/roleSpinner"
                 app:layout_constraintStart_toStartOf="parent"
@@ -198,9 +199,8 @@
                 android:textColor="#FFFFFF"
                 android:textAllCaps="false"
                 android:paddingVertical="12dp"
-                android:onClick="@{()-> viewModel.doRegister()}"
                 app:cornerRadius="8dp"
-                app:layout_constraintTop_toBottomOf="@id/roleSpinner2"
+                app:layout_constraintTop_toBottomOf="@id/spinnerCozinha"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 

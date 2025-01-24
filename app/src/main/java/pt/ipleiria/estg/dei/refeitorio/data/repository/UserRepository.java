@@ -7,6 +7,7 @@ import android.content.Context;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -14,6 +15,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import pt.ipleiria.estg.dei.refeitorio.MainApplication;
+import pt.ipleiria.estg.dei.refeitorio.data.models.Cozinha;
+import pt.ipleiria.estg.dei.refeitorio.data.models.EmentaMenu;
 import pt.ipleiria.estg.dei.refeitorio.data.models.User;
 import pt.ipleiria.estg.dei.refeitorio.data.network.ApiClient;
 import pt.ipleiria.estg.dei.refeitorio.data.network.ApiEndpoints;
@@ -119,6 +122,20 @@ public class UserRepository {
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
+                onError.onError("Erro ao processar a resposta do servidor.", ApiClient.RESULT_UNEXPECTED);
+            }
+        }, onError);
+    }
+
+
+    public void fetchCozinha(RequestHandler.SuccessListener<Cozinha[]> onSuccess, RequestHandler.ErrorListener onError){
+        RequestHandler.fetchData(context, ApiEndpoints.COZINHA_FETCH, response -> {
+            try {
+                JSONArray jsonResponse = new JSONArray(response);
+                Cozinha[] results =  new Gson().fromJson(jsonResponse.toString(), Cozinha[].class);
+                onSuccess.onSuccess(results);
+            }
+            catch (Exception ex){
                 onError.onError("Erro ao processar a resposta do servidor.", ApiClient.RESULT_UNEXPECTED);
             }
         }, onError);

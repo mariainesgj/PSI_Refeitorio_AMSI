@@ -10,9 +10,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 
 import java.util.Objects;
 
+import pt.ipleiria.estg.dei.refeitorio.data.models.Cozinha;
 import pt.ipleiria.estg.dei.refeitorio.data.repository.UserRepository;
 import pt.ipleiria.estg.dei.refeitorio.databinding.ActivityRegisterBinding;
 import pt.ipleiria.estg.dei.refeitorio.ui.activities.home.HomeActivity;
@@ -55,6 +57,20 @@ public class RegisterActivity extends AppCompatActivity {
                     })
                     .show();
         });
+
+        viewModel.cozinhas.observe(this, value -> {
+
+            ArrayAdapter<Cozinha> spinnerArrayAdapter = new ArrayAdapter<Cozinha>
+                    (this, android.R.layout.simple_spinner_dropdown_item,
+                            value);
+
+            binding.spinnerCozinha.setAdapter(spinnerArrayAdapter);
+        });
+
+
+        binding.btnEntrar.setOnClickListener(event ->{
+            viewModel.doRegister();
+        });
     }
 
     @Override
@@ -69,5 +85,6 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        viewModel.fetchCozinha();
     }
 }

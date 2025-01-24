@@ -4,9 +4,12 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import pt.ipleiria.estg.dei.refeitorio.helpers.SharedPref;
+import pt.ipleiria.estg.dei.refeitorio.data.models.Cozinha;
+import pt.ipleiria.estg.dei.refeitorio.data.repository.UserRepository;
 
 public class ProfileViewModel extends ViewModel {
+
+    private final UserRepository userRepository;
     private MutableLiveData<String> username = new MutableLiveData<>();
     private MutableLiveData<String> email = new MutableLiveData<>();
     private MutableLiveData<String> name = new MutableLiveData<>();
@@ -14,6 +17,10 @@ public class ProfileViewModel extends ViewModel {
     private MutableLiveData<String> address = new MutableLiveData<>();
     private MutableLiveData<String> locale = new MutableLiveData<>();
     private MutableLiveData<String> postalCode = new MutableLiveData<>();
+
+    public MutableLiveData<Cozinha[]> cozinhas = new MutableLiveData<>(new Cozinha[]{});
+
+
 
 
     public void setUsername(String username) {
@@ -73,4 +80,15 @@ public class ProfileViewModel extends ViewModel {
     }
 
 
+    public ProfileViewModel(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public void fetchCozinha(){
+        userRepository.fetchCozinha( result -> {
+            cozinhas.postValue(result);
+        }, (erro, status) ->{
+
+        });
+    }
 }
