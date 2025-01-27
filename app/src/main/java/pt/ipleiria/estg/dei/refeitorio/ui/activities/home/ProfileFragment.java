@@ -67,6 +67,7 @@ public class ProfileFragment extends Fragment {
         EditText inputLocal = rootView.findViewById(R.id.inputLocal);
         EditText inputPostalCode = rootView.findViewById(R.id.inputPostalCode);
         TextView txtLogout = rootView.findViewById(R.id.txtLogout);
+        Button btnSave = rootView.findViewById(R.id.btnSave);
 
         if (viewModel != null) {
             viewModel.getUsername().observe(getViewLifecycleOwner(), inputUsername::setText);
@@ -77,6 +78,18 @@ public class ProfileFragment extends Fragment {
             viewModel.getLocale().observe(getViewLifecycleOwner(), inputLocal::setText);
             viewModel.getPostalCode().observe(getViewLifecycleOwner(), inputPostalCode::setText);
         }
+
+        btnSave.setOnClickListener(v ->{
+            String username = inputUsername.getText().toString();
+            String email = inputEmail.getText().toString();
+            String name = inputName.getText().toString();
+            String phone = inputPhone.getText().toString();
+            String street = inputStreet.getText().toString();
+            String locale = inputLocal.getText().toString();
+            String postalCode = inputPostalCode.getText().toString();
+
+            viewModel.update(username, email, name, phone, street, locale, postalCode);
+        });
 
         Button btn = rootView.findViewById(R.id.btnFaturas);
 

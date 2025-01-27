@@ -141,4 +141,53 @@ public class UserRepository {
         }, onError);
     }
 
+    public void update(
+            String username,
+            String email,
+            String nameUser,
+            String phoneNumber,
+            String address,
+            String locale,
+            String postalCode,
+            RequestHandler.SuccessListener<Boolean> onSuccess,
+            RequestHandler.ErrorListener onError
+    ) {
+
+        if (username == null || username.isEmpty() || email == null || email.isEmpty()
+                || nameUser == null || nameUser.isEmpty()
+                || phoneNumber == null || phoneNumber.isEmpty() || address == null || address.isEmpty()
+                || locale == null || locale.isEmpty() || postalCode == null || postalCode.isEmpty()) {
+            onError.onError("Preencha todos os campos, por favor.",ApiClient.RESULT_INVALID);
+            return;
+        }
+
+        JsonObject body = new JsonObject();
+        body.addProperty("username", username);
+        body.addProperty("email", email);
+        body.addProperty("name", nameUser);
+        body.addProperty("mobile", phoneNumber);
+        body.addProperty("street", address);
+        body.addProperty("locale", locale);
+        body.addProperty("postalCode", postalCode);
+
+        RequestHandler.putData(context, ApiEndpoints.USER_UPDATE, body, new HashMap<>(), response -> {
+            try {
+                JSONObject jsonResponse = new JSONObject(response);
+                if (RequestHandler.checkIfSuccess(jsonResponse)) {
+                    JSONObject data = jsonResponse.getJSONObject("data");
+                    User user = new Gson().fromJson(data.getString("user"), User.class);
+                    SharedPref.setItem(SharedPref.KEY_USER, user);
+                    onSuccess.onSuccess(true);
+                } else {
+                    String errorMessage = jsonResponse.optString("message", "Erro desconhecido");
+                    String statusMessage = jsonResponse.optString("status", ApiClient.RESULT_UNEXPECTED);
+                    onError.onError(errorMessage, statusMessage);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                onError.onError("Erro ao processar a resposta do servidor.", ApiClient.RESULT_UNEXPECTED);
+            }
+        }, onError);
+    }
+
 }

@@ -50,5 +50,6 @@
     <string name="finish_compra">Finalizar</string>
     <string name="data">Data</string>
     <string name="preco">Preço</string>
+    <string name="profile_title">gahrt</string>
     <string name="logout">Logout</string>
 </resources>

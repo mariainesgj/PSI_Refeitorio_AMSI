@@ -19,4 +19,6 @@ public class ApiEndpoints {
 
     public static final String CHECKOUT_POST = BASE_URL + "/carrinho/checkout";
     public static final String COZINHA_FETCH = BASE_URL + "/cozinhas";
+
+    public static final String USER_UPDATE = BASE_URL + "/profile/update";
 }

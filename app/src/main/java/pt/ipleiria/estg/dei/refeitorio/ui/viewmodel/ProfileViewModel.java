@@ -10,6 +10,7 @@ import pt.ipleiria.estg.dei.refeitorio.data.repository.UserRepository;
 public class ProfileViewModel extends ViewModel {
 
     private final UserRepository userRepository;
+    private boolean isRequestInProgress = false;
     private MutableLiveData<String> username = new MutableLiveData<>();
     private MutableLiveData<String> email = new MutableLiveData<>();
     private MutableLiveData<String> name = new MutableLiveData<>();
@@ -18,10 +19,14 @@ public class ProfileViewModel extends ViewModel {
     private MutableLiveData<String> locale = new MutableLiveData<>();
     private MutableLiveData<String> postalCode = new MutableLiveData<>();
 
+    private MutableLiveData<Boolean> doSuccess = new MutableLiveData<>(false);
+    private MutableLiveData<String> errors = new MutableLiveData<>();
+
     public MutableLiveData<Cozinha[]> cozinhas = new MutableLiveData<>(new Cozinha[]{});
 
-
-
+    public ProfileViewModel() {
+        this.userRepository = new UserRepository();
+    }
 
     public void setUsername(String username) {
         this.username.setValue(username);
@@ -79,16 +84,24 @@ public class ProfileViewModel extends ViewModel {
         return postalCode;
     }
 
-
-    public ProfileViewModel(UserRepository userRepository) {
-        this.userRepository = userRepository;
+    public void update(String username, String email, String name, String phone, String street, String locale, String postalCode) {
+        userRepository.update(
+                username,
+                email,
+                name,
+                phone,
+                street,
+                locale,
+                postalCode,
+                response -> {
+                    isRequestInProgress = false;
+                    doSuccess.postValue(true);
+                },
+                (error, status) -> {
+                    isRequestInProgress = false;
+                    errors.postValue(error);
+                }
+        );
     }
 
-    public void fetchCozinha(){
-        userRepository.fetchCozinha( result -> {
-            cozinhas.postValue(result);
-        }, (erro, status) ->{
-
-        });
-    }
 }
