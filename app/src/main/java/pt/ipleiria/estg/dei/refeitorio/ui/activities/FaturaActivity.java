@@ -30,9 +30,11 @@ public class FaturaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityFaturaBinding.inflate(getLayoutInflater());
         binding.setLifecycleOwner(this);
+
         setContentView(binding.getRoot());
         setSupportActionBar(binding.appBarHome.toolbar);
         Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
         viewModel = new ViewModelProvider(this).get(FaturaViewModel.class);
         binding.setViewModel(viewModel);
 

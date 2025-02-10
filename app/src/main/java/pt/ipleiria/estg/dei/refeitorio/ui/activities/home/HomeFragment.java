@@ -77,13 +77,13 @@ public class HomeFragment extends Fragment {
                     binding.txtInfo.setVisibility(View.VISIBLE);
                 }
 
-                binding.ementaContent.txtDate.setText(DateUtils.formatToddMMyyyy(result.data));
-                binding.ementaContent.txtSopa.setText(result.nomeSopa);
-                binding.ementaContent.txtPrato.setText(result.nomePrato);
+                    binding.ementaContent.txtDate.setText(DateUtils.formatToddMMyyyy(result.data));
+                    binding.ementaContent.txtSopa.setText(result.nomeSopa);
+                    binding.ementaContent.txtPrato.setText(result.nomePrato);
 
 
-                int color  = result.tipoPrato.equals(PratoDia.PRATO_NORMAL) ? R.color.azul : com.sahana.horizontalcalendar.R.color.green;
-                binding.ementaContent.cardContent.setCardBackgroundColor(AppCompatResources.getColorStateList(requireContext(), color));
+                    int color = result.tipoPrato.equals(PratoDia.PRATO_NORMAL) ? R.color.azul : com.sahana.horizontalcalendar.R.color.green;
+                    binding.ementaContent.cardContent.setCardBackgroundColor(AppCompatResources.getColorStateList(requireContext(), color));
 
 
             } catch (WriterException e) {

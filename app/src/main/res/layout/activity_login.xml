@@ -40,7 +40,7 @@
             android:id="@+id/inputEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="E-mail"
+            android:hint="Nome de Utilizador"
             android:inputType="textEmailAddress"
             android:backgroundTint="#50A9B4"
             android:layout_marginHorizontal="16dp"

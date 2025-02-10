@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.util.Arrays;
 import java.util.Objects;
@@ -55,7 +56,7 @@ public class CarrinhoActivity extends AppCompatActivity {
             viewModel.postCheckout(reponse->{
                 finish();
             }, (message, status) -> {
-                //TODO Show error
+                Toast.makeText(getApplicationContext(), "Erro: " + message, Toast.LENGTH_LONG).show();
             });
         });
 
